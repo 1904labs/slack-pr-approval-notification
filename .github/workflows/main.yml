@@ -1,0 +1,37 @@
+name: Slack PR Approval Notification
+on:
+  pull_request_review:
+    types:
+      - submitted
+jobs:
+  check-for-PR-approval-and-send-slack-notification:
+    runs-on: ubuntu-latest
+    env:
+      NODE_VERSION: v18.15.0
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v3
+      - name: Check for approvals
+        id: approval-check
+        uses: 1904labs/slack-pr-approval-notification@v1.0.0
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          user-mapping: ${{ secrets.user-mapping }}
+          approval-count: ${{ secrets.approval-count }}
+
+      - name: Send custom JSON data to Slack workflow
+        if: ${{ steps.approval-check.outputs.approvals == 'true' }}
+        id: slack
+        uses: slackapi/slack-github-action@v1.23.0
+        with:
+          # This data can be any valid JSON from a previous step in the GitHub Action
+          payload: |
+            {
+              "branch-name": "${{ steps.approval-check.outputs.branch-name }}",
+              "approvals": "${{ steps.approval-check.outputs.approvals }}",
+              "pr-url": "${{ steps.approval-check.outputs.pr-url }}",
+              "pr-owner": "${{ steps.approval-check.outputs.pr-owner }}",
+              "slack-user": "${{ steps.approval-check.outputs.slack-user }}"
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

@@ -1,0 +1,28 @@
+name: 'Check for 2 GitHub Pull Request Approvals'
+description: 'Check for 2 approvals on a GitHub Pull Request, and output relevant information for a Slack notification'
+inputs:
+  GITHUB_TOKEN:
+    description: 'The GitHub token to use for API calls'
+    required: true
+  user-mapping:
+    description: 'A mapping of GitHub usernames to Slack IDs in the string format "{"example":"U1234556", "example2":"U1234567"}"'
+    required: true
+  approval-count:
+    description: 'The number of approvals required for the PR to be considered approved'
+    required: true
+
+outputs:
+  branch-name:
+    description: 'The name of the branch that the PR is for'
+  pr-owner:
+    description: 'The owner of the PR'
+  approvals:
+    description: 'Whether the PR has the required number of approvals or not'
+  pr-url:
+    description: 'The URL of the PR'
+  slack-user:
+    description: 'The Slack user associated with the PR'
+
+runs:
+  using: 'node16'
+  main: 'main.js'
