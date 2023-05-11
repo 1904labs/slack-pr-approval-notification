@@ -39,7 +39,7 @@ async function run() {
       if (approved.length >= approvalCount) {
         let data = {
           'branch-name': branchName,
-          approvals: true,
+          approvals: 'true',
           'pr-url': prUrl,
           'pr-owner': prOwner,
           'slack-user': githubToSlackUserMap[prOwner],
