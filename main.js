@@ -37,21 +37,20 @@ async function run() {
       const approved = reviews.filter((review) => review.state === 'APPROVED');
 
       if (approved.length >= approvalCount) {
-        let data = JSON.stringify({
+        let data = {
           'branch-name': branchName,
           approvals: true,
           'pr-url': prUrl,
           'pr-owner': prOwner,
           'slack-user': githubToSlackUserMap[prOwner],
           'approval-count': approvalCount,
-        });
+        };
 
         let config = {
-          method: 'post',
-          maxBodyLength: Infinity,
+          method: 'POST',
           url: SLACK_WEBHOOK_URL,
           headers: {
-            'Content-Type': 'text/plain',
+            'Content-Type': 'application/json',
           },
           data: data,
         };
