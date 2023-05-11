@@ -49,7 +49,7 @@ async function run() {
         let config = {
           method: 'post',
           maxBodyLength: Infinity,
-          url: 'https://hooks.slack.com/workflows/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',
+          url: SLACK_WEBHOOK_URL,
           headers: {
             'Content-Type': 'text/plain',
           },
