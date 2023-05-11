@@ -44,7 +44,7 @@ async function run() {
       console.log({ approved });
 
       if (approved.length >= approvalCount) {
-        await axios.post(SLACK_WEBHOOK_URL, {
+        let data = JSON.stringify({
           'branch-name': branchName,
           approvals: true,
           'pr-url': prUrl,
@@ -52,6 +52,18 @@ async function run() {
           'slack-user': githubToSlackUserMap[prOwner],
           'approval-count': approvalCount,
         });
+
+        let config = {
+          method: 'post',
+          maxBodyLength: Infinity,
+          url: 'https://hooks.slack.com/workflows/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',
+          headers: {
+            'Content-Type': 'text/plain',
+          },
+          data: data,
+        };
+
+        await axios.request(config);
       }
     } catch (e) {
       console.log('Something went wrong!', e);
