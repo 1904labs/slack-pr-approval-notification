@@ -11,7 +11,6 @@ async function run() {
   const approvalCount = core.getInput('approval-count', { required: true });
 
   const githubToSlackUserMap = JSON.parse(userMappingInput);
-  console.log(githubToSlackUserMap);
 
   const octokit = getOctokit(GITHUB_TOKEN);
 
@@ -25,13 +24,9 @@ async function run() {
         pull_number: number,
       });
 
-      console.log('made it to checkApprovals');
-
       const branchName = pullRequest.head.ref;
       const prOwner = pullRequest.user.login;
       const prUrl = pullRequest.html_url;
-
-      console.log({ branchName, prOwner, prUrl });
 
       const { data: reviews } = await octokit.rest.pulls.listReviews({
         owner,
@@ -40,8 +35,6 @@ async function run() {
       });
 
       const approved = reviews.filter((review) => review.state === 'APPROVED');
-
-      console.log({ approved });
 
       if (approved.length >= approvalCount) {
         let data = JSON.stringify({
