@@ -35,6 +35,7 @@ async function run() {
       });
 
       const approved = reviews.filter((review) => review.state === 'APPROVED');
+      console.log(approved);
 
       if (approved.length >= approvalCount) {
         console.log('Sending slack message');
