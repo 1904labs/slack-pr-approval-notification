@@ -27,8 +27,8 @@ describe('GitHub Action', () => {
   it('should send a message to Slack when the approval count is reached', async () => {
     const GITHUB_TOKEN = 'test-token';
     const SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/xxx/yyy';
-    const userMapping = '{"testuser": "U123456789"}';
-    const approvalCount = 2;
+    const userMapping = JSON.stringify({ testuser: 'U123456789' });
+    const approvalCount = '2';
 
     core.getInput
       .mockReturnValueOnce(GITHUB_TOKEN)
@@ -69,7 +69,7 @@ describe('GitHub Action', () => {
     expect(slackMock.isDone()).toBe(true);
     expect(axios.post).toHaveBeenCalledWith(SLACK_WEBHOOK_URL, {
       'branch-name': 'test-branch',
-      approvals: true,
+      approvals: 'true',
       'pr-url': 'https://github.com/test-owner/test-repo/pull/1',
       'pr-owner': 'githubUser',
       'slack-user': 'slackUser',
