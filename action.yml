@@ -4,6 +4,9 @@ inputs:
   GITHUB_TOKEN:
     description: 'The GitHub token to use for API calls'
     required: true
+  SLACK_WEBHOOK_URL:
+    description: 'The Slack webhook URL to use for sending notifications'
+    required: true
   user-mapping:
     description: 'A mapping of GitHub usernames to Slack IDs in the string format "{"example":"U1234556", "example2":"U1234567"}"'
     required: true
