@@ -11,27 +11,11 @@ jobs:
     steps:
       - name: Get Code
         uses: actions/checkout@v3
-      - name: Check for approvals
-        id: approval-check
-        uses: 1904labs/slack-pr-approval-notification@v1.0.0
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          user-mapping: ${{ secrets.user-mapping }}
-          approval-count: ${{ secrets.approval-count }}
-
-      - name: Send custom JSON data to Slack workflow
-        if: ${{ steps.approval-check.outputs.approvals == 'true' }}
-        id: slack
-        uses: slackapi/slack-github-action@v1.23.0
-        with:
-          # This data can be any valid JSON from a previous step in the GitHub Action
-          payload: |
-            {
-              "branch-name": "${{ steps.approval-check.outputs.branch-name }}",
-              "approvals": "${{ steps.approval-check.outputs.approvals }}",
-              "pr-url": "${{ steps.approval-check.outputs.pr-url }}",
-              "pr-owner": "${{ steps.approval-check.outputs.pr-owner }}",
-              "slack-user": "${{ steps.approval-check.outputs.slack-user }}"
-            }
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Install Dependencies
+        run: npm install
+      - name: run test
+        run: npm run test
