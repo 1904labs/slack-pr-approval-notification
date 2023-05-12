@@ -35,7 +35,7 @@ async function run() {
 
       const approved = reviews.filter((review) => review.state === 'APPROVED');
 
-      if (approved.length >= approvalCount) {
+      if (approved.length === approvalCount) {
         let data = {
           'branch-name': branchName,
           approvals: 'true',

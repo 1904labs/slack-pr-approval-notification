@@ -1,8 +1,7 @@
 name: Slack PR Approval Notification
 on:
-  pull_request_review:
-    types:
-      - submitted
+ pull_request:
+   types: [opened, synchronize, reopened, ready_for_review]
 jobs:
   check-for-PR-approval-and-send-slack-notification:
     runs-on: ubuntu-latest
