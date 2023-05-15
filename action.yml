@@ -1,5 +1,5 @@
-name: 'Check for 2 GitHub Pull Request Approvals'
-description: 'Check for 2 approvals on a GitHub Pull Request, and output relevant information for a Slack notification'
+name: 'Check for GitHub Pull Request Approvals'
+description: 'Check for approvals of a specific number on a GitHub Pull Request, and output relevant information for a Slack notification'
 inputs:
   GITHUB_TOKEN:
     description: 'The GitHub token to use for API calls'

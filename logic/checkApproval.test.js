@@ -59,7 +59,7 @@ describe('GitHub Action', () => {
     await checkApproval();
 
     // add a timeout for async functions to run
-    await new Promise((resolve) => setTimeout(resolve, 100));
+    await new Promise((resolve) => setTimeout(resolve, 0));
 
     expect(core.getInput).toHaveBeenCalledTimes(4);
     expect(mockOctokit.rest.pulls.get).toHaveBeenCalledTimes(1);
@@ -117,7 +117,7 @@ describe('GitHub Action', () => {
     await checkApproval();
 
     // add a timeout for async functions to run
-    await new Promise((resolve) => setTimeout(resolve, 100));
+    await new Promise((resolve) => setTimeout(resolve, 0));
 
     expect(core.getInput).toHaveBeenCalledTimes(4);
     expect(mockOctokit.rest.pulls.get).toHaveBeenCalledTimes(1);
@@ -167,7 +167,7 @@ describe('GitHub Action', () => {
     await checkApproval();
 
     // add a timeout for async functions to run
-    await new Promise((resolve) => setTimeout(resolve, 100));
+    await new Promise((resolve) => setTimeout(resolve, 0));
 
     expect(core.getInput).toHaveBeenCalledTimes(4);
     expect(mockOctokit.rest.pulls.get).toHaveBeenCalledTimes(1);
