@@ -53,7 +53,7 @@ jobs:
 
    2. Finalize your workflow configuration by designating the channel for receiving notifications. This process will generate a webhook URL.
 
-   3. Subsequently, establish the `SLACK_WEBHOOK_URL` by [creating a secret within your GitHub Action's settings](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets#creating-encrypted-secrets-for-a-repository).
+4. Subsequently, establish the `SLACK_WEBHOOK_URL` by [creating a secret within your GitHub Action's settings](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets#creating-encrypted-secrets-for-a-repository).
 
 ## Action Inputs
 
